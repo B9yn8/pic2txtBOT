@@ -53,6 +53,10 @@ def image_to_text(update, context):
 
     # إرسال رسالة للمستخدم لتوضيح العملية
     update.message.reply_text("إذا كنت ترغب في دعمنا، يمكنك التبرع عبر /donate")
+
+tesseract_path = pytesseract.get_tesseract_version().get('tesseract_version')
+
+print("مسار Tesseract:", tesseract_path)
     os.remove(img_file)
 
     # يجب إغلاق الملف بعد الانتهاء من استخدامه
