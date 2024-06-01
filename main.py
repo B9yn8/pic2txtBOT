@@ -22,11 +22,15 @@ def download_language_files():
 
 # إعداد Tesseract
 def setup_tesseract():
+    global tesseract_path
     os.environ["TESSDATA_PREFIX"] = "./tessdata"
+    tesseract_path = pytesseract.get_tesseract_version().get('tesseract_version')
     if tesseract_path:
         pytesseract.pytesseract.tesseract_cmd = tesseract_path
     else:
         print("Error: Tesseract path not found. Make sure to set the TESSERACT_CMD environment variable.")
+    print("مسار Tesseract:", tesseract_path)
+
 
 # وظيفة لتحويل الصورة إلى نص
 def image_to_text(update, context):
@@ -54,9 +58,6 @@ def image_to_text(update, context):
     # إرسال رسالة للمستخدم لتوضيح العملية
     update.message.reply_text("إذا كنت ترغب في دعمنا، يمكنك التبرع عبر /donate")
 
-tesseract_path = pytesseract.get_tesseract_version().get('tesseract_version')
-
-print("مسار Tesseract:", tesseract_path)
     os.remove(img_file)
 
     # يجب إغلاق الملف بعد الانتهاء من استخدامه
