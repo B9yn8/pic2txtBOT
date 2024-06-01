@@ -2,11 +2,9 @@ import os
 import pytesseract
 from PIL import Image
 from telegram.ext import CommandHandler, MessageHandler, Filters, Updater
-from threading import Thread
 
-# Get the path to the Tesseract executable
-tesseract_path = pytesseract.pytesseract.get_tesseract_version().get('tesseract_version')
-
+# Get the path to the Tesseract executable from the environment variable
+tesseract_path = os.getenv("TESSERACT_CMD")
 
 # تعيين التوكن الخاص بالبوت
 TOKEN = "6806941124:AAEbsXEPS9824Mcnt4EcK1JZFuF6EkDZOtE"
@@ -28,7 +26,7 @@ def setup_tesseract():
     if tesseract_path:
         pytesseract.pytesseract.tesseract_cmd = tesseract_path
     else:
-        print("Error: Tesseract path not found.")
+        print("Error: Tesseract path not found. Make sure to set the TESSERACT_CMD environment variable.")
 
 # وظيفة لتحويل الصورة إلى نص
 def image_to_text(update, context):
