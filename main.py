@@ -47,16 +47,17 @@ def image_to_text(update, context):
         # حذف الملف بعد الانتهاء
         os.remove(img_file)
     except Exception as e:
-        # في حالة وجود أي خطأ، إرسال رسالة إلى المستخدم
-               error_message = f"حدث خطأ أثناء معالجة الصورة. الرجاء المحاولة مرة أخرى. \n\n مسار Tesseract: {tesseract_path}"
+        # إرسال رسالة الخطأ مع المسار إلى المستخدم
+        error_message = f"حدث خطأ أثناء معالجة الصورة. الرجاء المحاولة مرة أخرى. \n\n مسار Tesseract: {tesseract_path}"
+        msg.edit_text(error_message)
 
-     
     # إرسال رسالة للمستخدم لتوضيح العملية
     update.message.reply_text("إذا كنت ترغب في دعمنا، يمكنك التبرع عبر /donate")
     os.remove(img_file)
 
     # يجب إغلاق الملف بعد الانتهاء من استخدامه
     img.close()
+
 
 # وظيفة للترحيب
 def start(update, context):
