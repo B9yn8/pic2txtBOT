@@ -48,7 +48,8 @@ def image_to_text(update, context):
         os.remove(img_file)
     except Exception as e:
         # في حالة وجود أي خطأ، إرسال رسالة إلى المستخدم
-        msg.edit_text("حدث خطأ أثناء معالجة الصورة. الرجاء المحاولة مرة أخرى.")
+               error_message = f"حدث خطأ أثناء معالجة الصورة. الرجاء المحاولة مرة أخرى. \n\n مسار Tesseract: {tesseract_path}"
+
      
     # إرسال رسالة للمستخدم لتوضيح العملية
     update.message.reply_text("إذا كنت ترغب في دعمنا، يمكنك التبرع عبر /donate")
